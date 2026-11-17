@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+langgraph
+langchain
+langchain-groq
+langchain-huggingface
+langchain-pinecone
+pinecone-client
+tavily-python
+pypdf
+python-multipart
+python-dotenv
+requests
+sentence-transformers
+langchain-community
+langchain-tavily
+langgraph-checkpoint-sqlite

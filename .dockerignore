@@ -1,0 +1,21 @@
+# Git and Virtual Environments
+.git/
+.github/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment Variables (Security)
+.env
+.env.*
+
+# Local Databases and Temp Files
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+temp_*
