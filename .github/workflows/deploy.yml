@@ -1,4 +1,4 @@
-name: Deploy AegisOps to AWS EC2
+name: Deploy EnterpriseAI to AWS EC2
 
 on:
   push:
@@ -41,13 +41,13 @@ jobs:
             echo "TAVILY_API_KEY=${{ secrets.TAVILY_API_KEY }}" >> .env
             echo "EMBEDDING_MODEL=all-MiniLM-L6-v2" >> .env
 
-            # 2. Stop and remove any previous container
+            # 2. Stop/remove old container and clear leftover failed build cache
             sudo docker stop aegisops-container || true
             sudo docker rm aegisops-container || true
+            sudo docker system prune -af || true
 
-            # 3. Build the Docker image and clean old dangling images
+           # 3. Build the lightweight CPU Docker image
             sudo docker build -t aegisops-image .
-            sudo docker image prune -f
 
             # 4. Run container on Port 80 with auto-restart
             sudo docker run -d --restart unless-stopped --name aegisops-container -p 80:8000 --env-file .env aegisops-image
