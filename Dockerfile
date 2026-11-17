@@ -10,11 +10,13 @@ RUN apt-get update && apt-get install -y \
     sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install CPU-only PyTorch first to avoid downloading 3.5GB of NVIDIA CUDA libraries
+# Force CPU-only PyTorch (~200MB instead of 4.5GB CUDA build)
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir \
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    torch==2.5.1+cpu \
+    -r requirements.txt
 
 COPY . .
 

@@ -1,36 +1,10 @@
-name: Deploy EnterpriseAI to AWS EC2
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    name: Build & Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Copy project files to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: "."
-          target: "/home/ubuntu/aegisops"
-          overwrite: true
-
-      - name: SSH into EC2, Build, and Run Docker
+- name: SSH into EC2, Build, and Run Docker
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          command_timeout : 20m
+          command_timeout: 20m
           script: |
             cd /home/ubuntu/aegisops
             
@@ -41,13 +15,14 @@ jobs:
             echo "TAVILY_API_KEY=${{ secrets.TAVILY_API_KEY }}" >> .env
             echo "EMBEDDING_MODEL=all-MiniLM-L6-v2" >> .env
 
-            # 2. Stop/remove old container and clear leftover failed build cache
+            # 2. Stop old container and wipe failed build cache to free disk space
             sudo docker stop aegisops-container || true
             sudo docker rm aegisops-container || true
             sudo docker system prune -af || true
+            sudo docker builder prune -af || true
 
-           # 3. Build the lightweight CPU Docker image
+            # 3. Build lightweight CPU Docker image
             sudo docker build -t aegisops-image .
 
-            # 4. Run container on Port 80 with auto-restart
+            # 4. Run container on Port 80
             sudo docker run -d --restart unless-stopped --name aegisops-container -p 80:8000 --env-file .env aegisops-image
