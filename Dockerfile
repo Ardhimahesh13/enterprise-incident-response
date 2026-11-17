@@ -15,7 +15,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir \
     --extra-index-url https://download.pytorch.org/whl/cpu \
-    torch==2.5.1+cpu \
+    torch==2.6.0+cpu \
     -r requirements.txt
 
 COPY . .
