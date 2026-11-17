@@ -1,5 +1,5 @@
 
-# Enterpirse Incident Co-Pilot: Self-RAG & Corrective-RAG Enterprise Incident Response Copilot
+# Enterprise Incident Co-Pilot: Self-RAG & Corrective-RAG Enterprise Incident Response Copilot
 
 An autonomous AI Site Reliability Engineering (SRE) assistant built with **LangGraph**, **LangChain**, **FastAPI**, **Groq**, and **Pinecone** that investigates production incidents, retrieves internal runbooks, falls back to real-time web search when internal knowledge is insufficient, and evaluates generated responses to minimize hallucinations before delivering troubleshooting recommendations to engineers.
 
