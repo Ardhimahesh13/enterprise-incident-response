@@ -316,6 +316,7 @@ AegisOps Incident Response Copilot
 
 ## Author
 
+
 **Ardhi Mahesh**
 
 - GitHub: [@Ardhimahesh13](https://github.com/Ardhimahesh13)
@@ -325,7 +326,7 @@ AegisOps Incident Response Copilot
 
 ## Live Deployment
 
-* **Live Application:** [AegisOps Incident Copilot (AWS EC2)](http://32.198.2.0/)
+* **Live Application:** [EnterpriseAI Incident Copilot (AWS EC2)](http://32.198.2.0/)
 * **API Health / Docs:** [FastAPI Swagger UI](http://32.198.2.0/docs)
 
 > **Note:** Hosted on an AWS EC2 instance (`Ubuntu 24.04` + Docker). If the instance is temporarily paused between demos to conserve cloud credits, follow the local setup steps below or reach out for a live walkthrough.
